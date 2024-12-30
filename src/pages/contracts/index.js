@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
@@ -38,20 +38,6 @@ export default function ContractsPage({ contracts: initialContracts = [] }) {
   const [statusFilter, setStatusFilter] = useState('');
   const [contracts, setContracts] = useState(initialContracts);
   const router = useRouter();
-
-  useEffect(() => {
-    fetchContracts();
-  }, []);
-
-  const fetchContracts = async () => {
-    try {
-      const response = await fetch('/api/contracts');
-      const data = await response.json();
-      setContracts(data);
-    } catch (error) {
-      console.error('Error fetching contracts:', error);
-    }
-  };
 
   const handleDeleteContract = async (id, e) => {
     e.stopPropagation();
@@ -214,17 +200,17 @@ export async function getServerSideProps() {
       updatedAt: contract.updatedAt.toISOString(),
       startDate: contract.startDate ? contract.startDate.toISOString() : null,
       endDate: contract.endDate ? contract.endDate.toISOString() : null,
-      budget: {
+      budget: contract.budget ? {
         ...contract.budget,
         date: contract.budget.date.toISOString(),
         createdAt: contract.budget.createdAt.toISOString(),
         updatedAt: contract.budget.updatedAt.toISOString(),
-      },
-      kekv: {
+      } : null,
+      kekv: contract.kekv ? {
         ...contract.kekv,
         createdAt: contract.kekv.createdAt.toISOString(),
         updatedAt: contract.kekv.updatedAt.toISOString(),
-      }
+      } : null
     }));
 
     return {
