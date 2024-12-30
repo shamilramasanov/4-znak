@@ -6,7 +6,7 @@ import { Button } from '../../../shared/components/ui/Button';
 import { Input } from '../../../shared/components/ui/Input';
 import { Table } from '../../../shared/components/ui/Table';
 import { colors } from '../../../core/theme/colors';
-import { formatMoney, formatDate } from '../../../shared/utils';
+import { formatMoney, formatDate } from '../../../shared/utils/format';
 import { prisma } from '@/lib/prisma';
 
 export default function ContractPayments({ contract, payments, totalPaid, remainingAmount }) {
