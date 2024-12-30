@@ -6,11 +6,8 @@ import { Button } from '../../../shared/components/ui/Button';
 import { Input } from '../../../shared/components/ui/Input';
 import { Table } from '../../../shared/components/ui/Table';
 import { colors } from '../../../core/theme/colors';
-import { formatMoney, formatDate } from '../../../shared/utils/format';
-import { PrismaClient } from '../../../lib/prisma';
-import { cn } from '../../../utils/cn';
-
-const prisma = new PrismaClient();
+import { formatMoney, formatDate } from '../../../shared/utils';
+import { prisma } from '@/lib/prisma';
 
 export default function ContractPayments({ contract, payments, totalPaid, remainingAmount }) {
   const router = useRouter();
